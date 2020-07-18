@@ -1,9 +1,9 @@
 // write your custom hook here to control your checkout form
 import { useState } from "react";
-// import { useLocalStorage } from "./useLocalStorage";
+import { useLocalStorage } from "./useLocalStorage";
 
 export const useForm = (initialValue, callback) => {
-  const [values, setValues] = useState("form-data", initialValue);
+  const [values, setValues] = useLocalStorage("form-data", initialValue);
 
   const handleChanges = (e) => {
     setValues({
@@ -17,10 +17,5 @@ export const useForm = (initialValue, callback) => {
     callback();
   };
 
-  const clearForm = (e) => {
-    e.preventDefault();
-    setValues(initialValue);
-  };
-
-  return [values, handleChanges, handleSubmit, clearForm];
+  return [values, handleChanges, handleSubmit];
 };
